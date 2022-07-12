@@ -168,20 +168,20 @@ echo "Downloading bootstrap"
 #BLUEOS_FACTORY="bluerobotics/blueos-core:factory" # used for "factory reset"
 
 #docker pull $BLUEOS_BOOTSTRAP
-#docker pull $BLUEOS_CORE
+docker pull $BLUEOS_CORE
 # Use current release version for factory fallback
-#docker image tag $BLUEOS_CORE $BLUEOS_FACTORY
+docker image tag $BLUEOS_CORE $BLUEOS_FACTORY
 
 # Create blueos-bootstrap container
-#docker create \
-#    -t \
-#    --restart unless-stopped \
-#    --name blueos-bootstrap \
-#    --net=host \
-#    -v $HOME/.config/blueos/bootstrap:/root/.config/bootstrap \
-#    -v /var/run/docker.sock:/var/run/docker.sock \
-#    -e BLUEOS_CONFIG_PATH=$HOME/.config/blueos \
-#    $BLUEOS_BOOTSTRAP
+docker create \
+    -t \
+    --restart unless-stopped \
+    --name blueos-bootstrap \
+    --net=host \
+    -v $HOME/.config/blueos/bootstrap:/root/.config/bootstrap \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -e BLUEOS_CONFIG_PATH=$HOME/.config/blueos \
+    $BLUEOS_BOOTSTRAP
 
 # add docker entry to rc.local
 sed -i "\%^exit 0%idocker start blueos-bootstrap" /etc/rc.local || echo "sed failed to add expand_fs entry in /etc/rc.local"
