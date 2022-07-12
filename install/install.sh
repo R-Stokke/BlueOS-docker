@@ -158,9 +158,9 @@ curl -fsSL $ROOT/install/udev/100.autopilot.rules -o /etc/udev/rules.d/100.autop
 
 echo "Disabling automatic Link-local configuration in dhcpd.conf."
 # delete line if it already exists
-sed -i '/noipv4ll/d' /etc/dhcpcd.conf
+sed -i '/noipv4ll/d' /etc/dhcp/dhcpd.conf
 # add noipv4ll
-sed -i '$ a noipv4ll' /etc/dhcpcd.conf
+sed -i '$ a noipv4ll' /etc/dhcp/dhcpd.conf
 
 echo "Downloading bootstrap"
 BLUEOS_BOOTSTRAP="bluerobotics/blueos-bootstrap:$VERSION" # Use current version
